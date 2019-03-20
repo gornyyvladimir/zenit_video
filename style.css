@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'BebasNeue';
+  src: url('fonts/BebasNeue.eot');
+  src: url('fonts/BebasNeue.eot?#iefix') format('embedded-opentype'),
+       url('fonts/BebasNeue.woff2') format('woff2'),
+       url('fonts/BebasNeue.woff') format('woff'),
+       url('fonts/BebasNeue.ttf') format('truetype'),
+       url('fonts/BebasNeue.svg#BebasNeue') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  -ms-content-zooming: none;
+}
+
+html, body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+#hint {
+  position: relative;
+  font-family: helvetica, arial, sans-serif;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  z-index: 1000;
+  background-color: white;
+}
+
+#pano {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  width: 400px;
+}
+
+.text-hotspot {
+  position: relative;
+  /* max-width: 600px; */
+  /* font-family: 'Roboto Condensed', sans-serif; */
+  font-family: 'BebasNeue'; 
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 72px;
+  color: transparent;
+  text-align: center;
+  text-shadow: 0 0 5px #271A20;
+  z-index: 500;
+  /* background-color: red; */
+}
+
+.text-hotspot.number {
+  font-size: 250px;
+}
