@@ -53,11 +53,11 @@ var lastNameHotspot = scene
     { perspective: { radius: 1500 } },
   );
 
-  var numberHotspot = scene
+var numberHotspot = scene
   .hotspotContainer()
   .createHotspot(
     numberElement,
-    {yaw: -0.6108182376195028, pitch: 0.271448338865941},
+    { yaw: -0.6108182376195028, pitch: 0.271448338865941 },
     { perspective: { radius: 1500 } },
   );
 
@@ -68,64 +68,41 @@ scene.switchTo();
 // Playback cannot start automatically because most browsers require the play()
 // method on the video element to be called in the context of a user action.
 // Whether playback has started.
-var started = false;
-// tryStart();
 
-document.body.addEventListener('click', tryStart);
-document.body.addEventListener('click', function(e) {
-  var view = viewer.view();
-  console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }));
-});
-document.body.addEventListener('touchstart', tryStart);
+// Add video element
+var video = document.createElement('video');
+video.src = './video.mp4';
+video.crossOrigin = 'anonymous';
+video.loop = false;
 
-// Try to start playback.
-function tryStart() {
-  if (started) {
-    return;
-  }
-  console.log(started);
-  started = true;
-  document.querySelector('#hint').style.display = 'none';
+// Prevent the video from going full screen on iOS.
+video.playsInline = true;
+video.webkitPlaysInline = true;
 
-  var video = document.createElement('video');
-  video.src = './video.mp4';
-  video.crossOrigin = 'anonymous';
-  video.muted = true;
+var loader = document.querySelector('#loader');
 
-  video.autoplay = true;
-  video.loop = false;
-
-  // Prevent the video from going full screen on iOS.
-  video.playsInline = true;
-  video.webkitPlaysInline = true;
-
-  var promise = video.play();
-
-  if (promise !== undefined) {
-    promise.then(_ => {
-      // Autoplay started!
-      console.log("started")
-    }).catch(error => {
-      console.log("Sorry", error);
-      // Autoplay was prevented.
-      // Show a "Play" button so that user can start playback.
-    });
-  }
-
-  // video.play();
-
-  waitForReadyState(video, video.HAVE_METADATA, 100, function() {
-    waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, function() {
-      asset.setVideo(video);
-    });
+waitForReadyState(video, video.HAVE_METADATA, 100, function() {
+  waitForReadyState(video, video.HAVE_ENOUGH_DATA, 100, function() {
+    asset.setVideo(video);
+    loader.style.display = 'none';
   });
+});
+
+document.body.addEventListener('click', startVideo);
+document.body.addEventListener('touchstart', startVideo);
+
+// Start playback.
+var started = false;
+function startVideo() {
+  if (started) return;
+  started = true;
+  video.play();
 }
 
 // Wait for an element to reach the given readyState by polling.
 // The HTML5 video element exposes a `readystatechange` event that could be
 // listened for instead, but it seems to be unreliable on some browsers.
 function waitForReadyState(element, readyState, interval, done) {
-  console.log("Here")
   var timer = setInterval(function() {
     if (element.readyState >= readyState) {
       clearInterval(timer);
@@ -137,19 +114,21 @@ function waitForReadyState(element, readyState, interval, done) {
 var radius = 1500;
 
 document.addEventListener('keypress', function(event) {
-  if(event.key === '+')
-  {
-    console.log("+")
-    console.log(radius)
+  if (event.key === '+') {
+    console.log('+');
+    console.log(radius);
     radius++;
     hotspot2.setPerspective({ radius: radius });
   }
-  if(event.key === '-') {
-    console.log("-")
-    console.log(radius)
+  if (event.key === '-') {
+    console.log('-');
+    console.log(radius);
     radius--;
     hotspot2.setPerspective({ radius: radius });
   }
 });
 
-// $('.hotspot').fitText(0.6);
+document.body.addEventListener('click', function(e) {
+  var view = viewer.view();
+  console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }));
+});
