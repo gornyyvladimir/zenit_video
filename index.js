@@ -1,5 +1,18 @@
 'use strict';
 
+var coordsArray = [
+  {
+    id: 0,
+    text: { yaw: -0.5892327674686495, pitch: 0.06512889642958797 },
+    number: { yaw: -0.5911346944350129, pitch: 0.1774602762166353 },
+  },
+  {
+    id: 1,
+    text: { yaw: -0.6086027813351276, pitch: 0.1413926915131576 },
+    number: { yaw: -0.6108182376195028, pitch: 0.271448338865941 },
+  },
+];
+
 // Create viewer.
 // Video requires WebGL support.
 var viewerOpts = { stageType: 'webgl' };
@@ -69,9 +82,13 @@ scene.switchTo();
 // method on the video element to be called in the context of a user action.
 // Whether playback has started.
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 // Add video element
 var video = document.createElement('video');
-video.src = './video.mp4';
+video.src = `video_${1}.mp4`;
 video.crossOrigin = 'anonymous';
 video.loop = false;
 
@@ -88,15 +105,12 @@ waitForReadyState(video, video.HAVE_METADATA, 100, function() {
   });
 });
 
-document.body.addEventListener('click', startVideo);
-document.body.addEventListener('touchstart', startVideo);
-
 // Start playback.
 var started = false;
 function startVideo() {
   if (started) return;
-  started = true;
   video.play();
+  started = true;
 }
 
 // Wait for an element to reach the given readyState by polling.
@@ -131,4 +145,10 @@ document.addEventListener('keypress', function(event) {
 document.body.addEventListener('click', function(e) {
   var view = viewer.view();
   console.log(view.screenToCoordinates({ x: e.clientX, y: e.clientY }));
+});
+
+var button = document.querySelector('.start-button');
+button.addEventListener('click', function() {
+  button.style.display = 'none';
+  startVideo();
 });
