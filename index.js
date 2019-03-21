@@ -3,15 +3,75 @@
 var coordsArray = [
   {
     id: 0,
-    text: { yaw: -0.5892327674686495, pitch: 0.06512889642958797 },
-    number: { yaw: -0.5911346944350129, pitch: 0.1774602762166353 },
+    text: {
+      yaw: -0.5877760286507387,
+      pitch: 0.08333776124826864,
+    },
+    number: {
+      yaw: -0.5918354586416724,
+      pitch: 0.2112339346558647,
+    },
   },
   {
     id: 1,
     text: { yaw: -0.6086027813351276, pitch: 0.1413926915131576 },
     number: { yaw: -0.6108182376195028, pitch: 0.271448338865941 },
   },
+  {
+    id: 2,
+    text: {
+      yaw: -0.5787760286507387,
+      pitch: 0.08333776124826864,
+    },
+    number: {
+      yaw: -0.5868354586416724,
+      pitch: 0.2112339346558647,
+    },
+  },
+  {
+    id: 3,
+    text: {
+      yaw: -0.5427760286507387,
+      pitch: 0.08333776124826864,
+    },
+    number: {
+      yaw: -0.5448354586416724,
+      pitch: 0.23523393465586473,
+    },
+    radius: 1290,
+  },
+  {
+    id: 4,
+    text: {
+      yaw: -0.5867760286507387,
+      pitch: 0.13633776124826869,
+    },
+    number: {
+      yaw: -0.5908354586416724,
+      pitch: 0.26323393465586475,
+    },
+  },
+  {
+    id: 5,
+    text: {
+      yaw: -0.6197760286507388,
+      pitch: 0.07533776124826863,
+    },
+    number: {
+      yaw: -0.6258354586416724,
+      pitch: 0.2052339346558647,
+    },
+  },
 ];
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+var currentVideo = 5;
+var currentCoords = coordsArray.find(function(element) {
+  return element.id === currentVideo;
+});
 
 // Create viewer.
 // Video requires WebGL support.
@@ -60,19 +120,11 @@ numberElement.className = 'text-hotspot number';
 
 var lastNameHotspot = scene
   .hotspotContainer()
-  .createHotspot(
-    lastNameElement,
-    { yaw: -0.6086027813351276, pitch: 0.1413926915131576 },
-    { perspective: { radius: 1500 } },
-  );
+  .createHotspot(lastNameElement, currentCoords.text, { perspective: { radius: currentCoords.radius || 1500 } });
 
 var numberHotspot = scene
   .hotspotContainer()
-  .createHotspot(
-    numberElement,
-    { yaw: -0.6108182376195028, pitch: 0.271448338865941 },
-    { perspective: { radius: 1500 } },
-  );
+  .createHotspot(numberElement, currentCoords.number, { perspective: { radius: currentCoords.radius || 1500 } });
 
 // Display scene.
 scene.switchTo();
@@ -82,13 +134,9 @@ scene.switchTo();
 // method on the video element to be called in the context of a user action.
 // Whether playback has started.
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
-}
-
 // Add video element
 var video = document.createElement('video');
-video.src = `video_${1}.mp4`;
+video.src = `video_${currentVideo}.mp4`;
 video.crossOrigin = 'anonymous';
 video.loop = false;
 
@@ -125,21 +173,62 @@ function waitForReadyState(element, readyState, interval, done) {
   }, interval);
 }
 
+// document.addEventListener('keypress', function(event) {
+//   if (event.key === '+') {
+//     console.log('+');
+//     console.log(radius);
+//     radius++;
+//     hotspot2.setPerspective({ radius: radius });
+//   }
+//   if (event.key === '-') {
+//     console.log('-');
+//     console.log(radius);
+//     radius--;
+//     hotspot2.setPerspective({ radius: radius });
+//   }
+// });
+
+var dragHotspot = lastNameHotspot;
+
+lastNameElement.addEventListener('click', function() {
+  dragHotspot = lastNameHotspot;
+});
+
+numberElement.addEventListener('click', function() {
+  dragHotspot = numberHotspot;
+});
+
 var radius = 1500;
 
 document.addEventListener('keypress', function(event) {
+  var type = dragHotspot === lastNameHotspot ? 'text' : 'number';
+  if (event.key === 'd') {
+    currentCoords[type].yaw = currentCoords[type].yaw + 0.001;
+    dragHotspot.setPosition(currentCoords[type]);
+  }
+  if (event.key === 'a') {
+    currentCoords[type].yaw = currentCoords[type].yaw - 0.001;
+    dragHotspot.setPosition(currentCoords[type]);
+  }
+  if (event.key === 's') {
+    currentCoords[type].pitch = currentCoords[type].pitch + 0.001;
+    dragHotspot.setPosition(currentCoords[type]);
+  }
+  if (event.key === 'w') {
+    currentCoords[type].pitch = currentCoords[type].pitch - 0.001;
+    dragHotspot.setPosition(currentCoords[type]);
+  }
   if (event.key === '+') {
-    console.log('+');
-    console.log(radius);
-    radius++;
-    hotspot2.setPerspective({ radius: radius });
+    radius += 30;
+    currentCoords.radius = radius;
+    dragHotspot.setPerspective({ radius: radius });
   }
   if (event.key === '-') {
-    console.log('-');
-    console.log(radius);
-    radius--;
-    hotspot2.setPerspective({ radius: radius });
+    radius -= 30;
+    currentCoords.radius = radius;
+    dragHotspot.setPerspective({ radius: radius });
   }
+  console.log(currentCoords);
 });
 
 document.body.addEventListener('click', function(e) {
