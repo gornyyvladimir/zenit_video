@@ -68,7 +68,7 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-var currentVideo = 5;
+var currentVideo = getRandomInt(6);
 var currentCoords = coordsArray.find(function(element) {
   return element.id === currentVideo;
 });
