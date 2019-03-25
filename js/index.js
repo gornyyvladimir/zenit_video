@@ -79,11 +79,23 @@ var VIDEO_FORMATS = [
   },
 ];
 
+// Get parameters from url
+var urlParams = new URLSearchParams(window.location.search);
+var lastName = urlParams.get('lastName');
+var number = urlParams.get('number');
+var videoId = urlParams.get('video');
+var prevWebsite = urlParams.get('prevWebsite');
+
+var backButton = document.getElementById('back-button');
+if(prevWebsite) {
+  backButton.href = prevWebsite;
+}
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-var currentVideo = getRandomInt(6);
+var currentVideo = videoId && +videoId < coordsArray.length ? +videoId : getRandomInt(coordsArray.length);
 var currentCoords = coordsArray.find(function(element) {
   return element.id === currentVideo;
 });
@@ -119,11 +131,6 @@ var scene = viewer.createScene({
 // Get the stage.
 var stage = viewer.stage();
 
-// Get parameters from url
-var urlParams = new URLSearchParams(window.location.search);
-var lastName = urlParams.get('lastName');
-var number = urlParams.get('number');
-
 // Add hotspot.
 var lastNameElement = document.createElement('h2');
 lastNameElement.innerHTML = lastName || 'Болельщик';
@@ -131,7 +138,7 @@ lastNameElement.className = 'text-hotspot';
 
 var numberElement = document.createElement('h2');
 numberElement.innerHTML = number || '99';
-numberElement.className = 'text-hotspot number';
+numberElement.className = 'text-hotspot text-hotspot--number';
 
 var lastNameHotspot = scene
   .hotspotContainer()
@@ -153,7 +160,7 @@ scene.switchTo();
 var video = document.createElement('video');
 VIDEO_FORMATS.forEach((function(item){
   var source = document.createElement('source');
-  source.src = `video_${currentVideo}.${item.ext}`;
+  source.src = `../public/video/video_${currentVideo}.${item.ext}`;
   source.type = item.type;
   video.appendChild(source);
 }));

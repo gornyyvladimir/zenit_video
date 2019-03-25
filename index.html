@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
     <title>Video | Marzipano</title>
+    <meta charset="UTF-8" />
     <meta name="description" content="Play a 360° video in equirectangular format." />
     <meta
       name="viewport"
@@ -12,9 +13,14 @@
         width: device-width;
       }
     </style>
-    <link rel="stylesheet" href="http://www.marzipano.net/demos/common/reset.css" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div id="pano"></div>
@@ -36,10 +42,17 @@
       <span class="loader-text">Загружается...</span>
       <a href="#" class="loader-button">Купить билет</a>
     </div>
-    
+
     <button class="start-button"><i class="far fa-play-circle"></i></button>
-    <!-- <div id="content">
-    </div> -->
+    <div class="ui">
+      <div class="buttons links">
+        <a href="https://shop.zenit-kazan.com/catalog/kit201819" class="button link left">Купить футболку</a>
+      </div>
+      <div class="buttons links">
+        <a id="back-button" href="https://zenit-kazan.com/" class="button link left">Вернуться на сайт</a>
+        <a id="vr-tour" href="https://zenit-kazan.com/" class="button link right">VR-ТУР</a>
+      </div>
+    </div>
 
     <script src="vendor/es5-shim.js"></script>
     <script src="vendor/eventShim.js"></script>
@@ -48,7 +61,7 @@
     <script src="vendor/screenfull.min.js"></script>
     <script src="vendor/bowser.min.js"></script>
     <script src="vendor/marzipano.js"></script>
-    <script src="VideoAsset.js"></script>
-    <script src="index.js"></script>
+    <script src="js/VideoAsset.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
