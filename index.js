@@ -64,6 +64,21 @@ var coordsArray = [
   },
 ];
 
+var VIDEO_FORMATS = [
+  {
+    ext: 'mp4',
+    type: 'video/mp4',
+  },
+  {
+    ext: 'webm',
+    type: 'video/webm',
+  },
+  {
+    ext: 'ogg',
+    type: 'video/ogv',
+  },
+];
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -136,7 +151,12 @@ scene.switchTo();
 
 // Add video element
 var video = document.createElement('video');
-video.src = `video_${currentVideo}.mp4`;
+VIDEO_FORMATS.forEach((function(item){
+  var source = document.createElement('source');
+  source.src = `video_${currentVideo}.${item.ext}`;
+  source.type = item.type;
+  video.appendChild(source);
+}));
 video.crossOrigin = 'anonymous';
 video.loop = false;
 
