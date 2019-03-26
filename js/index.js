@@ -170,6 +170,7 @@ video.loop = false;
 // Prevent the video from going full screen on iOS.
 video.playsInline = true;
 video.webkitPlaysInline = true;
+video.load();
 
 var loader = document.querySelector('#loader');
 
