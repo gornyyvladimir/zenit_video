@@ -30,8 +30,8 @@ html, body {
   padding: 0;
   margin: 0;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 #pano {
@@ -242,23 +242,10 @@ html, body {
 }
 
 /* my styles */
-.ui {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.links {
   justify-content: space-between;
-  z-index: 10;
-}
-
-.ui .buttons {
+  align-items: flex-start;
   padding: 1rem;
-}
-
-.ui .links {
-  justify-content: space-between;
-  align-items: flex-start
 }
 
 .link {
@@ -287,6 +274,7 @@ html, body {
 }
 
 .social-links {
+  z-index: 1;
 }
 
 .social-link {
