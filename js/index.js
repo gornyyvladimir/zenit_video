@@ -81,21 +81,18 @@ var VIDEO_FORMATS = [
 
 // Get parameters from url
 var urlParams = new URLSearchParams(window.location.search);
-var lastName = urlParams.get('lastName');
-var number = urlParams.get('number');
-var videoId = urlParams.get('video');
-var prevWebsite = urlParams.get('prevWebsite');
+var lastName = urlParams.get('lastName') || 'Фамилия';
+var number = urlParams.get('number') || '99';
+var videoId = Number(urlParams.get('videoId')) || getRandomInt(coordsArray.length);
 
-var backButton = document.getElementById('back-button');
-if(prevWebsite) {
-  backButton.href = prevWebsite;
-}
+var newurl = `${window.location.origin}/?lastName=${lastName}&number=${number}&videoId=${videoId}`
+window.history.pushState({path:newurl},'',newurl);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-var currentVideo = videoId && +videoId < coordsArray.length ? +videoId : getRandomInt(coordsArray.length);
+var currentVideo = videoId;
 var currentCoords = coordsArray.find(function(element) {
   return element.id === currentVideo;
 });
@@ -133,11 +130,11 @@ var stage = viewer.stage();
 
 // Add hotspot.
 var lastNameElement = document.createElement('h2');
-lastNameElement.innerHTML = lastName || 'Болельщик';
+lastNameElement.innerHTML = lastName;
 lastNameElement.className = 'text-hotspot';
 
 var numberElement = document.createElement('h2');
-numberElement.innerHTML = number || '99';
+numberElement.innerHTML = number;
 numberElement.className = 'text-hotspot text-hotspot--number';
 
 var lastNameHotspot = scene
@@ -158,12 +155,12 @@ scene.switchTo();
 
 // Add video element
 var video = document.createElement('video');
-VIDEO_FORMATS.forEach((function(item){
+VIDEO_FORMATS.forEach(function(item) {
   var source = document.createElement('source');
   source.src = `../public/video/video_${currentVideo}.${item.ext}`;
   source.type = item.type;
   video.appendChild(source);
-}));
+});
 video.crossOrigin = 'anonymous';
 video.loop = false;
 
@@ -270,18 +267,18 @@ button.addEventListener('click', function() {
   startVideo();
 });
 
-
 //social links
 var url = window.location.href;
-if(!videoId) {
-  url = `${window.location.href}&video=${currentVideo}`
-}
 console.log(url);
 var tw = document.querySelector('.tw');
 tw.href = `https://twitter.com/share?url=${encodeURIComponent(url)}`;
 var fb = document.querySelector('.fb');
-fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
 var vk = document.querySelector('.vk');
 vk.href = `https://vk.com/share.php?url=${encodeURIComponent(url)}`;
 var email = document.querySelector('.email');
-email.href=`mailto:?body=${encodeURIComponent(url)}`;
+email.href = `mailto:?body=${encodeURIComponent(url)}`;
+
+window.addEventListener('orientationchange', function() {
+  window.location.reload();
+});
