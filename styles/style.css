@@ -274,7 +274,7 @@ html, body {
 }
 
 .social-links {
-  z-index: 1;
+  position: relative;
 }
 
 .social-link {
