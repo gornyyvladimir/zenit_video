@@ -274,13 +274,14 @@ button.addEventListener('click', function() {
 //social links
 var url = window.location.href;
 if(!videoId) {
-  url = `${window.location.href}&videoId=${currentVideo}`
+  url = `${window.location.href}&video=${currentVideo}`
 }
+console.log(url);
 var tw = document.querySelector('.tw');
-tw.href = `https://twitter.com/share?url=${url}`;
+tw.href = `https://twitter.com/share?url=${encodeURIComponent(url)}`;
 var fb = document.querySelector('.fb');
-fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+fb.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
 var vk = document.querySelector('.vk');
-vk.href = `https://vk.com/share.php?url=${url}`;
+vk.href = `https://vk.com/share.php?url=${encodeURIComponent(url)}`;
 var email = document.querySelector('.email');
-email.href=`mailto:?body=${url}`;
+email.href=`mailto:?body=${encodeURIComponent(url)}`;
