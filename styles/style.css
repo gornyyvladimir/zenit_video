@@ -312,3 +312,9 @@ html, body {
     min-width: 0;
   }
 }
+
+@media (orientation: landscape) {
+  .buttons.bottom {
+    margin-bottom: 70px;
+  }
+}
