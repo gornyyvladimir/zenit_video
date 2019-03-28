@@ -269,3 +269,18 @@ button.addEventListener('click', function() {
   button.style.display = 'none';
   startVideo();
 });
+
+
+//social links
+var url = window.location.href;
+if(!videoId) {
+  url = `${window.location.href}&videoId=${currentVideo}`
+}
+var tw = document.querySelector('.tw');
+tw.href = `https://twitter.com/share?url=${url}`;
+var fb = document.querySelector('.fb');
+fb.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`
+var vk = document.querySelector('.vk');
+vk.href = `https://vk.com/share.php?url=${url}`;
+var email = document.querySelector('.email');
+email.href=`mailto:?body=${url}`;
