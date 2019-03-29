@@ -282,3 +282,17 @@ email.href = `mailto:?body=${encodeURIComponent(url)}`;
 window.addEventListener('orientationchange', function() {
   window.location.reload();
 });
+
+function changeHight() {
+  document.body.style.height = window.innerHeight + 'px';
+  // var pano = document.querySelector('#pano');
+  // var loader = document.querySelector('#loader');
+  // var ui = document.querySelector('.ui');
+  // var stylePano = window.getComputedStyle(pano);
+  // var styleLoader = window.getComputedStyle(loader);
+  // var styleUi = window.getComputedStyle(ui);
+  // alert(`body ${document.body.style.height}, pano ${stylePano.height}, ui ${styleUi.height}, loader ${styleLoader.height}`)
+}
+
+window.addEventListener('resize', changeHight);
+setTimeout(changeHight, 500);

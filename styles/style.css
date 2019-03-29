@@ -314,7 +314,7 @@ html, body {
 }
 
 @media (orientation: landscape) {
-  .buttons.bottom {
+  /* .buttons.bottom {
     margin-bottom: 70px;
-  }
+  } */
 }
