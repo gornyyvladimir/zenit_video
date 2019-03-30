@@ -62,6 +62,17 @@ var coordsArray = [
       pitch: 0.2052339346558647,
     },
   },
+  {
+    id: 6,
+    text: {
+      yaw: -0.5937760286507388,
+      pitch: 0.08133776124826864,
+    },
+    number: {
+      yaw: -0.5978354586416724,
+      pitch: 0.2072339346558647,
+    },
+  },
 ];
 
 var VIDEO_FORMATS = [
@@ -85,8 +96,8 @@ var lastName = urlParams.get('lastName') || 'Фамилия';
 var number = urlParams.get('number') || '99';
 var videoId = Number(urlParams.get('videoId')) || getRandomInt(coordsArray.length);
 
-var newurl = `${window.location.origin}/?lastName=${lastName}&number=${number}&videoId=${videoId}`
-window.history.pushState({path:newurl},'',newurl);
+var newurl = `${window.location.origin}/?lastName=${lastName}&number=${number}&videoId=${videoId}`;
+window.history.pushState({ path: newurl }, '', newurl);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
