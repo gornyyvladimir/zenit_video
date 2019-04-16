@@ -56,6 +56,8 @@ html, body {
 }
 
 .text-hotspot--number {
+  /* delete this in feature */
+  opacity: 0;
   font-size: 250px;
 }
 
