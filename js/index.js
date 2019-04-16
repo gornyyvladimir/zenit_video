@@ -94,7 +94,14 @@ var VIDEO_FORMATS = [
 var urlParams = new URLSearchParams(window.location.search);
 var lastName = urlParams.get('lastName') || 'Фамилия';
 var number = urlParams.get('number') || '99';
-var videoId = Number(urlParams.get('videoId')) || getRandomInt(coordsArray.length);
+var videoIdParam = Number(urlParams.get('videoId'));
+var videoId;
+if (videoIdParam >= 0 && videoIdParam < coordsArray.length) {
+  videoId = videoIdParam;
+}
+else {
+  videoId = getRandomInt(coordsArray.length);
+}
 
 var newurl = `${window.location.origin}/?lastName=${lastName}&number=${number}&videoId=${videoId}`;
 window.history.pushState({ path: newurl }, '', newurl);
