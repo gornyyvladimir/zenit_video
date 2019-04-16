@@ -92,7 +92,7 @@ var VIDEO_FORMATS = [
 
 // Get parameters from url
 var urlParams = new URLSearchParams(window.location.search);
-var lastName = urlParams.get('lastName') || 'Фамилия';
+var lastName = urlParams.get('fam') || 'Фамилия';
 var number = urlParams.get('number') || '99';
 var videoIdParam = urlParams.get('videoId') || getRandomInt(coordsArray.length);;
 var videoId;
@@ -103,7 +103,7 @@ else {
   videoId = getRandomInt(coordsArray.length);
 }
 
-var newurl = `${window.location.origin}/?lastName=${lastName}&number=${number}&videoId=${videoId}`;
+var newurl = `${window.location.origin}/?fam=${lastName}&number=${number}&videoId=${videoId}`;
 window.history.pushState({ path: newurl }, '', newurl);
 
 function getRandomInt(max) {
