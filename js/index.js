@@ -103,7 +103,7 @@ else {
   videoId = getRandomInt(coordsArray.length);
 }
 
-var newurl = `${window.location.origin}/?fam=${lastName}&number=${number}&videoId=${videoId}`;
+var newurl = `${window.location.origin}/zenit_video/?fam=${lastName}&number=${number}&videoId=${videoId}`;
 window.history.pushState({ path: newurl }, '', newurl);
 
 function getRandomInt(max) {
@@ -175,16 +175,16 @@ scene.switchTo();
 var video = document.createElement('video');
 VIDEO_FORMATS.forEach(function(item) {
   var source = document.createElement('source');
-  source.src = `../public/video/video_${currentVideo}.${item.ext}`;
+  source.src = `public/video/video_${currentVideo}.${item.ext}`;
   source.type = item.type;
   video.appendChild(source);
 });
 video.crossOrigin = 'anonymous';
 video.loop = false;
-
 // Prevent the video from going full screen on iOS.
 video.playsInline = true;
 video.webkitPlaysInline = true;
+video.preload = 'auto';
 video.load();
 
 var loader = document.querySelector('#loader');

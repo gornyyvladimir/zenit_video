@@ -293,19 +293,19 @@ html, body {
 }
 
 .tw {
-  background-image: url('/public/images/social_twitter.png');
+  background-image: url('../public/images/social_twitter.png');
 }
 
 .fb {
-  background-image: url('/public/images/social_facebook.png');
+  background-image: url('../public/images/social_facebook.png');
 }
 
 .vk {
-  background-image: url('/public/images/social_vkontakte.png');
+  background-image: url('../public/images/social_vkontakte.png');
 }
 
 .email {
-  background-image: url('/public/images/social_mail.png');
+  background-image: url('../public/images/social_mail.png');
 }
 
 @media screen and (max-width: 768px) {
